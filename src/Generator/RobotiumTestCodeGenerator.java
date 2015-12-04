@@ -63,14 +63,16 @@ public class RobotiumTestCodeGenerator {
 		return MethodSpec.methodBuilder("tearDown")
 			    .addAnnotation(Override.class)
 			    .addModifiers(Modifier.PUBLIC)
+			    .addException(Exception.class)
 			    .addStatement("solo.finishOpenedActivities()")
+			    .addStatement("super.tearDown()")
 			    .build();
 	}
 	
 	private MethodSpec generateTestMethod(List<String> userActions){
 		Builder builder = MethodSpec.methodBuilder("testDisplayBlackBox");
 		builder.addModifiers(Modifier.PUBLIC);
-		
+		builder.addStatement("solo.waitForActivity($N)", "LAUNCHER_ACTIVITY_FULL_CLASSNAME");
 		for(String action: userActions){
 			builder.addStatement("solo.$N",action);
 			builder.addStatement("solo.$N", getWaitTime());
@@ -82,7 +84,9 @@ public class RobotiumTestCodeGenerator {
 		return MethodSpec.methodBuilder("setUp")
 			    .addAnnotation(Override.class)
 			    .addModifiers(Modifier.PROTECTED)
+			    .addException(Exception.class)
 			    .addStatement("solo = new Solo(getInstrumentation(),getActivity())")
+			    .addStatement("super.setUp()")
 			    .build();
 	}
 	
