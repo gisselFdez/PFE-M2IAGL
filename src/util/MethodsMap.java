@@ -14,18 +14,34 @@ public class MethodsMap {
 			methodMap = new HashMap<String, HashMap<String, Method>>();			
 			Class<?>[] paramTypes = {HashMap.class};
 			
-			//OnClick	
+			//-------------- OnClick	
 			HashMap<String, Method> instancesOnClick = new HashMap<String, Method>();
-			instancesOnClick.put("Button", MethodFactory.class.getDeclaredMethod("buttonOnClick",paramTypes));
-			instancesOnClick.put("ImageView", MethodFactory.class.getDeclaredMethod("imageViewOnClick",paramTypes));
-			
+			instancesOnClick.put("Button", MethodFactory.class.getDeclaredMethod("clickOnButton",paramTypes));
+			instancesOnClick.put("ImageView", MethodFactory.class.getDeclaredMethod("clickOnView",paramTypes));
+			instancesOnClick.put("FrameLayout", MethodFactory.class.getDeclaredMethod("clickOnView",paramTypes));
+			instancesOnClick.put("ActionMenuItemView", MethodFactory.class.getDeclaredMethod("clickOnText",paramTypes));
 			methodMap.put("onClick", instancesOnClick);
 			
-			//performItemClick			
+			//-------------- performItemClick			
 			HashMap<String, Method> instancesPerformClick = new HashMap<String, Method>();
-			instancesPerformClick.put("ListMenuItemView", MethodFactory.class.getDeclaredMethod("listMenuPerformItemClick",paramTypes));
+			instancesPerformClick.put("ListMenuItemView", MethodFactory.class.getDeclaredMethod("clickInList",paramTypes));			
+			methodMap.put("onMenuItemSelected", instancesPerformClick);
 			
-			methodMap.put("performItemClick", instancesPerformClick);
+			//-------------- onMenuItemSelected
+			HashMap<String, Method> instancesMenuItemSelected = new HashMap<String, Method>();
+			instancesMenuItemSelected.put("MenuItemImpl", MethodFactory.class.getDeclaredMethod("clickOnText",paramTypes));			
+			methodMap.put("onMenuItemSelected", instancesMenuItemSelected);
+			
+			//-------------- performLongPress
+			HashMap<String, Method> instancesPerformLongPress = new HashMap<String, Method>();
+			instancesPerformLongPress.put("LinearLayout", MethodFactory.class.getDeclaredMethod("clickLongOnView",paramTypes));
+			instancesPerformLongPress.put("RelativeLayout", MethodFactory.class.getDeclaredMethod("clickLongOnView",paramTypes));		
+			methodMap.put("performLongPress", instancesPerformLongPress);
+			
+			//-------------- onKeyUp
+			HashMap<String, Method> instancesKeyUp = new HashMap<String, Method>();
+			instancesKeyUp.put("KeyEvent", MethodFactory.class.getDeclaredMethod("sendKey",paramTypes));			
+			methodMap.put("onKeyUp", instancesKeyUp);
 			
 		} catch (NoSuchMethodException| SecurityException  e) {
 			// TODO Auto-generated catch block

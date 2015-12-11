@@ -77,10 +77,25 @@ public class TestGenerator {
 				Object act = methodFactory.invoke(factory,methodParametersMap);
 				action = act.toString();
 				System.out.println("return: "+act);
-			}			
+			}
+			else{
+				if(methodParametersMap.get("action").equals("onClick") && methodParametersMap.get("mID")!=null){
+					Class<?>[] paramTypes = {HashMap.class};
+					methodFactory = MethodFactory.class.getDeclaredMethod("clickOnView",paramTypes);
+					Object act = methodFactory.invoke(factory,methodParametersMap);
+					action = act.toString();
+					System.out.println("return: "+act);
+				}
+			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {			
 			e.printStackTrace();
 			return action;
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}		
 		
 		return action;
@@ -104,14 +119,23 @@ public class TestGenerator {
 			if(param[0].contains("mID"))
 				methodParametersMap.put("mID", param[1]);
 			if(param[0].contains("mText"))
-				methodParametersMap.put("mText", param[1]);			
+				methodParametersMap.put("mText", param[1]);		
+			if(param[0].contains("mTitle"))
+				methodParametersMap.put("mTitle", param[1]);		
 			if(param[0].contains("location"))
 				methodParametersMap.put("location", param[1]);
 			if(param[0].contains("position"))
 				methodParametersMap.put("position", param[1]);
 			if(param[0].contains("id"))
-				methodParametersMap.put("id", param[1]);			
+				methodParametersMap.put("id", param[1]);	
+			if(param[0].contains("keyCode"))
+				methodParametersMap.put("keyCode", param[1]);
 			if(param[1].contains("instance of android")){
+				methodParametersMap.put("instance of android", param[1]);
+				String[] elements = param[1].split("\\.");
+				methodParametersMap.put("instanceOf", elements[(elements.length)-1]);
+			}
+			if(param[1].contains("instance of com.android")){
 				methodParametersMap.put("instance of android", param[1]);
 				String[] elements = param[1].split("\\.");
 				methodParametersMap.put("instanceOf", elements[(elements.length)-1]);

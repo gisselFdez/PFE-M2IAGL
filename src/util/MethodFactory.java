@@ -9,27 +9,40 @@ public class MethodFactory {
 	 * @param methodParametersMap
 	 * @return
 	 */
-	public String buttonOnClick(HashMap<String, String> methodParametersMap){
+	public String clickOnButton(HashMap<String, String> methodParametersMap){
 		//generate: clickOnButton("Text");
-		String method = MethodsRobotiumMap.getRobotiumMethod(methodParametersMap.get("action"),
-				methodParametersMap.get("instanceOf"));
 		String text = methodParametersMap.get("mText");
-		return method+"("+text+")";
+		return "clickOnButton("+text+")";
 	}
 	
-	public String imageViewOnClick(HashMap<String, String> methodParametersMap){
+	public String clickOnView(HashMap<String, String> methodParametersMap){
 		//generate: clickOnView(solo.getView(view))
-		String method = MethodsRobotiumMap.getRobotiumMethod(methodParametersMap.get("action"),
-				methodParametersMap.get("instanceOf"));
 		String view = methodParametersMap.get("mID");
-		return method+"(solo.getView("+view+"))";
+		return "clickOnView(solo.getView("+view+"))";
 	}
 	
-	public String listMenuPerformItemClick(HashMap<String, String> methodParametersMap){
+	public String clickInList(HashMap<String, String> methodParametersMap){
 		//generate: pressMenuItem(index);
-		String method = MethodsRobotiumMap.getRobotiumMethod(methodParametersMap.get("action"),
-				methodParametersMap.get("instanceOf"));
 		String valueId =  methodParametersMap.get("id");
-		return method+"("+valueId+")";
+		return "clickInList("+valueId+")";
 	}
+	
+	public String clickOnText(HashMap<String, String> methodParametersMap){
+		//generate: clickOnText(string);
+		String text =  methodParametersMap.get("mTitle");
+		return "clickOnText("+text+")";
+	}
+	
+	public String clickLongOnView(HashMap<String, String> methodParametersMap){
+		//generate: clickLongOnView(solo.getView(view));
+		String view =  methodParametersMap.get("mID");
+		return "clickLongOnView(solo.getView("+view+"))";
+	}
+	
+	public String sendKey(HashMap<String, String> methodParametersMap){
+		//generate: sendKey();
+		String key =  methodParametersMap.get("keyCode");
+		return "sendKey("+key+")";
+	}
+	
 }

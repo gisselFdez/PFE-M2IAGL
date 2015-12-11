@@ -19,7 +19,8 @@ public class MethodsRobotiumMap {
 		
 		//performItemClick	
 		HashMap<String, String> instancesPerformClick = new HashMap<String, String>();
-		instancesPerformClick.put("ListMenuItemView", "pressMenuItem");
+		//instancesPerformClick.put("ListMenuItemView", "pressMenuItem");
+		instancesPerformClick.put("ListMenuItemView", "clickInList");
 		robotiumMethodMap.put("performItemClick", instancesPerformClick);
 	}		
 	

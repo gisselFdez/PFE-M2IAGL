@@ -20,9 +20,7 @@ import com.squareup.javapoet.TypeSpec;
 public class RobotiumTestCodeGenerator {	
 	
 	public void generateRobotiumTest(String packageApp, List<String> userActions){
-		
-		//.addField(Solo.class, "solo", Modifier.PRIVATE)
-		
+				
 		//Generate the class
 		TypeSpec testRobotium = TypeSpec.classBuilder("TestRobotium")
 			.superclass(ActivityInstrumentationTestCase2.class)
@@ -73,9 +71,13 @@ public class RobotiumTestCodeGenerator {
 		Builder builder = MethodSpec.methodBuilder("testDisplayBlackBox");
 		builder.addModifiers(Modifier.PUBLIC);
 		builder.addStatement("solo.waitForActivity($N)", "LAUNCHER_ACTIVITY_FULL_CLASSNAME");
+		
 		for(String action: userActions){
-			builder.addStatement("solo.$N",action);
-			builder.addStatement("solo.$N", getWaitTime());
+			if(!action.equals(""))
+			{
+				builder.addStatement("solo.$N",action);
+				builder.addStatement("solo.$N", getWaitTime());
+			}			
 		}			    
 		return builder.build();
 	}
@@ -100,6 +102,6 @@ public class RobotiumTestCodeGenerator {
 	
 	private String getWaitTime(){
 		int time = 1000;
-		return "wait("+time+")";
+		return "sleep("+time+")";
 	}
 }
