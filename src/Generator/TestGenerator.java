@@ -15,7 +15,11 @@ import util.MethodsMap;
 public class TestGenerator {
 
 	String appName="";
+	String fileOutput;
 		
+	public TestGenerator(String fileOutput){
+		this.fileOutput = fileOutput;
+	}
 	/**
 	 * Generates the corresponding Robotium test
 	 * @param n_column
@@ -26,7 +30,7 @@ public class TestGenerator {
 		
 		//Generate Test code
 		RobotiumTestCodeGenerator clsGen = new RobotiumTestCodeGenerator();
-		clsGen.generateRobotiumTest(appName, actions);
+		clsGen.generateRobotiumTest(appName, actions,fileOutput);
 	}
 		
 	/**
@@ -72,7 +76,8 @@ public class TestGenerator {
 				
 		try {
 			Object factory = MethodFactory.class.newInstance();		
-			Method methodFactory = MethodsMap.getMethod(methodParametersMap.get("action"),methodParametersMap.get("instanceOf"));
+			String instance = verifyInstance(methodParametersMap.get("instanceOf"), methodParametersMap);
+			Method methodFactory = MethodsMap.getMethod(methodParametersMap.get("action"),instance);
 			if(methodFactory!=null){
 				Object act = methodFactory.invoke(factory,methodParametersMap);
 				action = act.toString();
@@ -101,6 +106,12 @@ public class TestGenerator {
 		return action;
 	}
 	
+	private String verifyInstance(String instanceOf,HashMap<String, String> methodParametersMap){
+		if(instanceOf.contains("Layout"))
+			instanceOf = methodParametersMap.get("parenAction");
+		return instanceOf;
+	}
+	
 	/**
 	 * Generates the parametersMap for the node action
 	 * @param nodeValue
@@ -114,7 +125,7 @@ public class TestGenerator {
 		//get all the action parameters
 		for(String value : values)
 		{
-			System.out.println("value"+value);
+			System.out.println("value: "+value);
 			String[] param = value.split("=");
 			if(param[0].contains("mID"))
 				methodParametersMap.put("mID", param[1]);
@@ -123,8 +134,8 @@ public class TestGenerator {
 			if(param[0].contains("mTitle"))
 				methodParametersMap.put("mTitle", param[1]);		
 			if(param[0].contains("location"))
-				methodParametersMap.put("location", param[1]);
-			if(param[0].contains("position"))
+				methodParametersMap.put("location", param[1]);							
+			if(param[0].contains("position") || param[0].contains("Position"))
 				methodParametersMap.put("position", param[1]);
 			if(param[0].contains("id"))
 				methodParametersMap.put("id", param[1]);	
@@ -144,6 +155,7 @@ public class TestGenerator {
 				methodParametersMap.put("location", param[1]);
 				String[] elements = param[1].split("\\.");
 				methodParametersMap.put("action", elements[(elements.length)-1]);
+				methodParametersMap.put("parenAction", elements[(elements.length)-2]);
 			}	
 		}
 		return methodParametersMap;

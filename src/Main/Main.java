@@ -13,28 +13,35 @@ import Generator.TestGenerator;
 
 public class Main {
 	
-	//private static final String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/pockettool-CrowdCrashGraph";
-	//private static final String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/wikipedia-CrowdCrashGraph";	
-	//private static final String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/bites-CrowdCrashGraph";
-	//private static final String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash1-CrowdCrashGraph";
-	//private static final String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash2-CrowdCrashGraph";
-	private static final String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/opensudoku-CrowdCrashGraph";
+	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/pockettool-CrowdCrashGraph";
+	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/wikipedia-CrowdCrashGraph";	
+	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/bites-CrowdCrashGraph";
+	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash1-CrowdCrashGraph";
+	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash2-CrowdCrashGraph";
+	private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/opensudoku-CrowdCrashGraph";	
+	private static String fileOutput="C:/Users/AnaGissel/Documents/MASTER/PFE/Workspace/TestAndroidCalculatorBlackBox2/src/com/testcalculator";
 	
 	public static void main(String[] args) {
 		String query = "MATCH (from: APP), (to:CRASH_EVENT), "+
 			      "paths = allShortestPaths( (from)-[:NEXT*]->(to) ) " +
 			      "WITH REDUCE(dist = 0, rel in rels(paths) | dist + rel.pN) AS distance, paths "+
 			      "RETURN paths, distance ORDER BY distance "+
-			      "LIMIT 1";
+			      "LIMIT 1";			
 				
-		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );		
+		
+		if (args.length == 2) {
+			DB_PATH = args[0].toString();
+			fileOutput = args[1].toString();
+		}
+				
+		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
 		
 		//Execute query
 		try ( Transaction ignored = db.beginTx();
 			      Result result = db.execute(query) )
 		{				
 			//generate test
-			TestGenerator generator = new TestGenerator();		
+			TestGenerator generator = new TestGenerator(fileOutput);		
 			generator.GenerateRobotiumTest(result.columnAs("paths"));									
 		}
 	}

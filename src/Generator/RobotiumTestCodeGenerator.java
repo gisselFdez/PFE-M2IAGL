@@ -19,7 +19,13 @@ import com.squareup.javapoet.TypeSpec;
 
 public class RobotiumTestCodeGenerator {	
 	
-	public void generateRobotiumTest(String packageApp, List<String> userActions){
+	/**
+	 * Generates the Robotium code (BlackboxTest) for the given userActions in the especified output
+	 * @param packageApp
+	 * @param userActions
+	 * @param output
+	 */
+	public void generateRobotiumTest(String packageApp, List<String> userActions,String output){
 				
 		//Generate the class
 		TypeSpec testRobotium = TypeSpec.classBuilder("TestRobotium")
@@ -49,14 +55,17 @@ public class RobotiumTestCodeGenerator {
 		    .build();
 
 		try {
-			javaFile.writeTo(new File("C:/Users/AnaGissel/Documents/MASTER/PFE/Workspace/TestAndroidCalculatorBlackBox2/src/com/testcalculator"));
-			//javaFile.writeTo(System.out);
+			javaFile.writeTo(new File(output));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Generate the code from the Robotium TearDown method
+	 * @return
+	 */
 	private MethodSpec generateTearDownMethod(){
 		return MethodSpec.methodBuilder("tearDown")
 			    .addAnnotation(Override.class)
@@ -67,6 +76,11 @@ public class RobotiumTestCodeGenerator {
 			    .build();
 	}
 	
+	/**
+	 * Generate the code for the Robotium method testDisplayBlackBox containing all the userActions 
+	 * @param userActions
+	 * @return
+	 */
 	private MethodSpec generateTestMethod(List<String> userActions){
 		Builder builder = MethodSpec.methodBuilder("testDisplayBlackBox");
 		builder.addModifiers(Modifier.PUBLIC);
@@ -82,6 +96,10 @@ public class RobotiumTestCodeGenerator {
 		return builder.build();
 	}
 	
+	/**
+	 * Generate the code from the Robotium setUp method
+	 * @return
+	 */
 	private MethodSpec generateSetUpMethod(){
 		return MethodSpec.methodBuilder("setUp")
 			    .addAnnotation(Override.class)
@@ -92,6 +110,10 @@ public class RobotiumTestCodeGenerator {
 			    .build();
 	}
 	
+	/**
+	 * Generate the constructor for a Blackbox Robotium test class
+	 * @return
+	 */
 	private MethodSpec generateConstructor(){		
 		return MethodSpec.constructorBuilder()
 			    .addModifiers(Modifier.PUBLIC)
@@ -100,6 +122,10 @@ public class RobotiumTestCodeGenerator {
 			    .build();
 	}	
 	
+	/**
+	 * Define the sleep time between each Robotium action
+	 * @return
+	 */
 	private String getWaitTime(){
 		int time = 1000;
 		return "sleep("+time+")";
