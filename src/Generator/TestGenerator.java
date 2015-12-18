@@ -29,7 +29,7 @@ public class TestGenerator {
 		List<String> actions = treatInformation(n_column); 
 		
 		//Generate Test code
-		RobotiumTestCodeGenerator clsGen = new RobotiumTestCodeGenerator();
+		RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
 		clsGen.generateRobotiumTest(appName, actions,fileOutput);
 	}
 		
@@ -102,10 +102,15 @@ public class TestGenerator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		
 		return action;
 	}
 	
+	/**
+	 * Verify if the instance is a Layout
+	 * @param instanceOf
+	 * @param methodParametersMap
+	 * @return
+	 */
 	private String verifyInstance(String instanceOf,HashMap<String, String> methodParametersMap){
 		if(instanceOf.contains("Layout"))
 			instanceOf = methodParametersMap.get("parenAction");

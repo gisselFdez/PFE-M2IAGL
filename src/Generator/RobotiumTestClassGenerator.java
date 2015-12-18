@@ -17,7 +17,11 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.squareup.javapoet.TypeSpec;
 
-public class RobotiumTestCodeGenerator {	
+/**
+ * This class contains the methods to generate the Robotium test class code using the Javapoet library
+ * @author Ana Gissel *
+ */
+public class RobotiumTestClassGenerator {	
 	
 	/**
 	 * Generates the Robotium code (BlackboxTest) for the given userActions in the especified output

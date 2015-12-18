@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/AnaGissel/Documents/MASTER/PFE/neo4j-community-2.3.0/lib/commons-lang3-3.3.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/AnaGissel/Documents/MASTER/PFE/neo4j-community-2.3.0/lib/concurrentlinkedhashmap-lru-1.4.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/AnaGissel/Documents/MASTER/PFE/neo4j-community-2.3.0/lib/jline-2.12.jar"/>
@@ -39,5 +48,10 @@
 	<classpathentry kind="lib" path="C:/Users/AnaGissel/Documents/MASTER/PFE/Workspace/robotium-solo-5.5.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/AnaGissel/AppData/Local/Android/sdk/platforms/android-18/android.jar"/>
 	<classpathentry kind="lib" path="C:/Users/AnaGissel/Documents/MASTER/PFE/robotium-solo-5.5.2.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
