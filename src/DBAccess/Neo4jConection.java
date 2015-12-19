@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Path;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -18,9 +19,9 @@ public class Neo4jConection {
 		      "RETURN paths, distance ORDER BY distance "+
 		      "LIMIT 1";		
 	
-	public Iterator<Path> executeQueryToDB(String DB_PATH){
+	public ResourceIterator<Path> executeQueryToDB(String DB_PATH){
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
-		
+		System.out.println("excecute query");
 		//Execute query
 		try ( Transaction ignored = db.beginTx();
 			      Result result = db.execute(query) )

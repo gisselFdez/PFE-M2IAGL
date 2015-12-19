@@ -20,9 +20,11 @@ public class Main {
 			fileOutput = args[1].toString();
 		}			
 			//generate test
+			System.out.println("starting");
 			TestGenerator generator = new TestGenerator(fileOutput);	
 			Neo4jConection conectionDB = new Neo4jConection();
-			generator.GenerateRobotiumTest(conectionDB.executeQueryToDB(DB_PATH));									
+			generator.GenerateRobotiumTest(conectionDB.executeQueryToDB(DB_PATH));	
+			System.out.println("finished");
 		}
 }
 
