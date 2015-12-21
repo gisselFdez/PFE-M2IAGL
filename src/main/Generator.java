@@ -9,6 +9,11 @@ import entities.Trace;
 import factories.TraceFactory;
 import generators.TestGenerator;
 
+/**
+ * Generator 
+ * @author Ana Gissel
+ * 
+ */
 public class Generator {
 	
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/pockettool-CrowdCrashGraph";
@@ -19,8 +24,9 @@ public class Generator {
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/opensudoku-CrowdCrashGraph";	
 	private static String fileOutput="C:/Users/AnaGissel/Documents/MASTER/PFE/Workspace/TestAndroidCalculatorBlackBox2/src/com/testcalculator";
 	
+	
 	public static void main(String[] args) {	
-		
+		//Neo4j Dijkstra query to obtain the crash scenario
 		String query = "MATCH (from: APP), (to:CRASH_EVENT), "+
 			      "paths = allShortestPaths( (from)-[:NEXT*]->(to) ) " +
 			      "WITH REDUCE(dist = 0, rel in rels(paths) | dist + rel.pN) AS distance, paths "+
@@ -32,8 +38,7 @@ public class Generator {
 			fileOutput = args[1].toString();
 		}	
 		
-		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
-		
+		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );		
 		try ( Transaction ignored = db.beginTx();
 			      Result result = db.execute(query) )
 		{

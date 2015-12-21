@@ -9,6 +9,11 @@ import org.neo4j.graphdb.Path;
 
 import entities.Trace;
 
+/**
+ * Contains all the methods that treat the DB information to transform it into a Trace object
+ * @author Ana Gissel
+ *
+ */
 public class TraceFactory {
 
 	/**

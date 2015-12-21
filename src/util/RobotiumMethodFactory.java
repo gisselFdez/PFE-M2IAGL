@@ -3,7 +3,7 @@ package util;
 import java.util.HashMap;
 
 /**
- * 
+ * Contains all the methods that construct the Robotium events code
  * @author Ana Gissel
  *
  */
@@ -12,7 +12,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a clickOnButton method
 	 * @param methodParametersMap
-	 * @return
+	 * @return 
 	 */
 	public String clickOnButton(HashMap<String, String> methodParametersMap){
 		//generate: clickOnButton("Text");

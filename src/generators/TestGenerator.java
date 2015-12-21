@@ -13,6 +13,11 @@ import entities.Trace;
 import util.RobotiumMethodFactory;
 import util.MethodsMap;
 
+/**
+ * Transform the Android events into Robotuim events 
+ * @author Ana Gissel
+ *
+ */
 public class TestGenerator {
 
 	String appActivity="";
