@@ -30,7 +30,7 @@ public class Main {
 		if (args.length == 2) {
 			DB_PATH = args[0].toString();
 			fileOutput = args[1].toString();
-		}			
+		}	
 		
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
 		
