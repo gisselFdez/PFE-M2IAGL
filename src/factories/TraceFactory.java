@@ -1,4 +1,4 @@
-package Factories;
+package factories;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 
-import Entities.Trace;
+import entities.Trace;
 
 public class TraceFactory {
 

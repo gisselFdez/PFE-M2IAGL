@@ -1,4 +1,4 @@
-package Generator;
+package generators;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -9,7 +9,7 @@ import java.util.List;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 
-import Entities.Trace;
+import entities.Trace;
 import util.RobotiumMethodFactory;
 import util.MethodsMap;
 

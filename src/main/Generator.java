@@ -1,15 +1,15 @@
-package Main;
+package main;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
-import Entities.Trace;
-import Factories.TraceFactory;
-import Generator.TestGenerator;
+import entities.Trace;
+import factories.TraceFactory;
+import generators.TestGenerator;
 
-public class Main {
+public class Generator {
 	
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/pockettool-CrowdCrashGraph";
 	private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/wikipedia-CrowdCrashGraph";	
