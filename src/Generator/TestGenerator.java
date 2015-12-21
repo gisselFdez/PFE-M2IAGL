@@ -9,12 +9,13 @@ import java.util.List;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 
-import util.MethodFactory;
+import Entities.Trace;
+import util.RobotiumMethodFactory;
 import util.MethodsMap;
 
 public class TestGenerator {
 
-	String appName="";
+	String appActivity="";
 	String fileOutput;
 		
 	public TestGenerator(String fileOutput){
@@ -24,13 +25,10 @@ public class TestGenerator {
 	 * Generates the corresponding Robotium test
 	 * @param n_column
 	 */
-	public void GenerateRobotiumTest(Iterator<Path> n_column){				
-		//Treat the DB information
-		List<String> actions = treatInformation(n_column); 
-		
+	public void GenerateRobotiumTest(Trace trace){		
 		//Generate Test code
 		RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
-		clsGen.generateRobotiumTest(appName, actions,fileOutput);
+		clsGen.generateRobotiumTest(appActivity, getRobotiumMethods(trace.getActions()),fileOutput);
 	}
 		
 	/**
@@ -38,7 +36,7 @@ public class TestGenerator {
 	 * @param n_column
 	 * @return
 	 */
-	private List<String> treatInformation(Iterator<Path> n_column){
+	/*private List<String> treatInformation(Iterator<Path> n_column){
 		List<String> actions = new ArrayList<String>();
 		
 		//Generate code for every node
@@ -53,7 +51,7 @@ public class TestGenerator {
 				for (String key : node.getPropertyKeys()) {
 					System.out.println("KEY: "+key);
 					if(key.equals("app")){
-						appName = node.getProperty(key).toString();
+						appActivity = node.getProperty(key).toString();
 					}
 					if(!key.equals("app") && !key.equals("exception") && !key.equals("counter")){
 						actions.add(getActionCode(node.getProperty(key).toString()));
@@ -62,20 +60,34 @@ public class TestGenerator {
     		}					
         }
 		return actions;
+	}*/
+	
+	/**
+	 * Returns the list of equivalent Robotium methods for the given android Methods list
+	 * @param androidActions
+	 * @return
+	 */
+	private List<String> getRobotiumMethods(List<String> androidActions){
+		List<String> robotiumActions = new ArrayList<String>();
+		
+		for(String action : androidActions){
+			robotiumActions.add(getActionCode(action));
+		}
+		return robotiumActions;
 	}
 	
 	/**
-	 * Invoke the corresponding method to generate the Node action code.
-	 * @param nodeValue
+	 * get the corresponding Robotium method code for the Android action.
+	 * @param androidAction
 	 * @return
 	 */
-	private String getActionCode(String nodeValue)
+	private String getActionCode(String androidAction)
 	{
-		HashMap<String, String> methodParametersMap = generateParametersMap(nodeValue);
+		HashMap<String, String> methodParametersMap = generateParametersMap(androidAction);
 		String action="";
 				
 		try {
-			Object factory = MethodFactory.class.newInstance();		
+			Object factory = RobotiumMethodFactory.class.newInstance();		
 			String instance = verifyInstance(methodParametersMap.get("instanceOf"), methodParametersMap);
 			Method methodFactory = MethodsMap.getMethod(methodParametersMap.get("action"),instance);
 			if(methodFactory!=null){
@@ -86,7 +98,7 @@ public class TestGenerator {
 			else{
 				if(methodParametersMap.get("action").equals("onClick") && methodParametersMap.get("mID")!=null){
 					Class<?>[] paramTypes = {HashMap.class};
-					methodFactory = MethodFactory.class.getDeclaredMethod("clickOnView",paramTypes);
+					methodFactory = RobotiumMethodFactory.class.getDeclaredMethod("clickOnView",paramTypes);
 					Object act = methodFactory.invoke(factory,methodParametersMap);
 					action = act.toString();
 					System.out.println("return: "+act);

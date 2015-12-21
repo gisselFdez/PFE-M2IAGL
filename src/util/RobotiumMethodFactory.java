@@ -7,7 +7,7 @@ import java.util.HashMap;
  * @author Ana Gissel
  *
  */
-public class MethodFactory {
+public class RobotiumMethodFactory {
 
 	/**
 	 * Returns the corresponding Robotium code for a clickOnButton method

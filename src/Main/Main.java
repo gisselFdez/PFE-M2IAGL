@@ -1,6 +1,12 @@
 package Main;
 
-import DBAccess.Neo4jConection;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Result;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+
+import Entities.Trace;
+import Factories.TraceFactory;
 import Generator.TestGenerator;
 
 public class Main {
@@ -15,14 +21,30 @@ public class Main {
 	
 	public static void main(String[] args) {	
 		
+		String query = "MATCH (from: APP), (to:CRASH_EVENT), "+
+			      "paths = allShortestPaths( (from)-[:NEXT*]->(to) ) " +
+			      "WITH REDUCE(dist = 0, rel in rels(paths) | dist + rel.pN) AS distance, paths "+
+			      "RETURN paths, distance ORDER BY distance "+
+			      "LIMIT 1";	
+		
 		if (args.length == 2) {
 			DB_PATH = args[0].toString();
 			fileOutput = args[1].toString();
 		}			
-			//generate test
-			TestGenerator generator = new TestGenerator(fileOutput);	
-			Neo4jConection conectionDB = new Neo4jConection();
-			generator.GenerateRobotiumTest(conectionDB.executeQueryToDB(DB_PATH));									
-		}
+		
+		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
+		
+		try ( Transaction ignored = db.beginTx();
+			      Result result = db.execute(query) )
+		{
+			//get the trace for the database
+			TraceFactory traceFactory = new TraceFactory();
+			Trace trace = traceFactory.getTrace(result.columnAs("paths"));
+			
+			//Generate the robotium test
+			TestGenerator generator = new TestGenerator(fileOutput);		
+			generator.GenerateRobotiumTest(trace);									
+		}									
+	}
 }
 

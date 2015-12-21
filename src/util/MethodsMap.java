@@ -23,37 +23,37 @@ public class MethodsMap {
 			
 			//-------------- OnClick	
 			HashMap<String, Method> instancesOnClick = new HashMap<String, Method>();
-			instancesOnClick.put("Button", MethodFactory.class.getDeclaredMethod("clickOnButton",paramTypes));
-			instancesOnClick.put("ImageView", MethodFactory.class.getDeclaredMethod("clickOnView",paramTypes));
-			instancesOnClick.put("FrameLayout", MethodFactory.class.getDeclaredMethod("clickOnView",paramTypes));
-			instancesOnClick.put("ActionMenuItemView", MethodFactory.class.getDeclaredMethod("clickOnText",paramTypes));
+			instancesOnClick.put("Button", RobotiumMethodFactory.class.getDeclaredMethod("clickOnButton",paramTypes));
+			instancesOnClick.put("ImageView", RobotiumMethodFactory.class.getDeclaredMethod("clickOnView",paramTypes));
+			instancesOnClick.put("FrameLayout", RobotiumMethodFactory.class.getDeclaredMethod("clickOnView",paramTypes));
+			instancesOnClick.put("ActionMenuItemView", RobotiumMethodFactory.class.getDeclaredMethod("clickOnText",paramTypes));
 			methodMap.put("onClick", instancesOnClick);
 			
 			//-------------- performItemClick			
 			HashMap<String, Method> instancesPerformClick = new HashMap<String, Method>();
-			instancesPerformClick.put("ListMenuItemView", MethodFactory.class.getDeclaredMethod("clickInList",paramTypes));			
+			instancesPerformClick.put("ListMenuItemView", RobotiumMethodFactory.class.getDeclaredMethod("clickInList",paramTypes));			
 			methodMap.put("performItemClick", instancesPerformClick);
 			
 			//-------------- onMenuItemSelected
 			HashMap<String, Method> instancesMenuItemSelected = new HashMap<String, Method>();
-			instancesMenuItemSelected.put("MenuItemImpl", MethodFactory.class.getDeclaredMethod("clickOnText",paramTypes));			
+			instancesMenuItemSelected.put("MenuItemImpl", RobotiumMethodFactory.class.getDeclaredMethod("clickOnText",paramTypes));			
 			methodMap.put("onMenuItemSelected", instancesMenuItemSelected);
 			
 			//-------------- performLongPress
 			HashMap<String, Method> instancesPerformLongPress = new HashMap<String, Method>();
-			instancesPerformLongPress.put("LinearLayout", MethodFactory.class.getDeclaredMethod("clickLongOnView",paramTypes));
-			instancesPerformLongPress.put("RelativeLayout", MethodFactory.class.getDeclaredMethod("clickLongOnView",paramTypes));
-			instancesPerformLongPress.put("AbsListView", MethodFactory.class.getDeclaredMethod("clickLongInList",paramTypes));	
+			instancesPerformLongPress.put("LinearLayout", RobotiumMethodFactory.class.getDeclaredMethod("clickLongOnView",paramTypes));
+			instancesPerformLongPress.put("RelativeLayout", RobotiumMethodFactory.class.getDeclaredMethod("clickLongOnView",paramTypes));
+			instancesPerformLongPress.put("AbsListView", RobotiumMethodFactory.class.getDeclaredMethod("clickLongInList",paramTypes));	
 			methodMap.put("performLongPress", instancesPerformLongPress);
 			
 			//-------------- onKeyUp
 			HashMap<String, Method> instancesKeyUp = new HashMap<String, Method>();
-			instancesKeyUp.put("KeyEvent", MethodFactory.class.getDeclaredMethod("sendKey",paramTypes));			
+			instancesKeyUp.put("KeyEvent", RobotiumMethodFactory.class.getDeclaredMethod("sendKey",paramTypes));			
 			methodMap.put("onKeyUp", instancesKeyUp);
 			
 			//-------------- onConfigurationChanged
 			HashMap<String, Method> instancesonConfigurationChanged = new HashMap<String, Method>();
-			instancesonConfigurationChanged.put("Configuration", MethodFactory.class.getDeclaredMethod("setActivityOrientation",paramTypes));			
+			instancesonConfigurationChanged.put("Configuration", RobotiumMethodFactory.class.getDeclaredMethod("setActivityOrientation",paramTypes));			
 			methodMap.put("onConfigurationChanged", instancesonConfigurationChanged);
 			
 		} catch (NoSuchMethodException| SecurityException  e) {
