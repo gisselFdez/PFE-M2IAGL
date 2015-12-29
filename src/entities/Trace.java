@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class Trace {
 	/**
 	 * The list of Android events to reproduce the crash
 	 */
-	private List<String> events;
+	private List<HashMap<String,String>> events;
 	
 	/**
 	 * The exception produced in the crash escenario
@@ -33,12 +34,12 @@ public class Trace {
 		this.appActivity = appActivity;
 	}
 	
-	public List<String> getActions() {
+	public List<HashMap<String,String>> getEvents() {
 		return events;
 	}
 	
-	public void setActions(List<String> actions) {
-		this.events = actions;
+	public void setEvents(List<HashMap<String,String>> events) {
+		this.events = events;
 	}
 	
 	public String getException() {
