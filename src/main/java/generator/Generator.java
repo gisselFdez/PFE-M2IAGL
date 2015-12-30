@@ -1,4 +1,4 @@
-package main;
+package generator;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
