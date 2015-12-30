@@ -33,5 +33,4 @@ public class EventTransformerTest {
 	            "\n  'expected' = "+expected, 
 	            expected.equals(robotiumEvents));
 	}
-
 }

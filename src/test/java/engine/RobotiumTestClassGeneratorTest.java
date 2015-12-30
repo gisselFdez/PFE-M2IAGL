@@ -31,8 +31,7 @@ public class RobotiumTestClassGeneratorTest {
 	}
 	
 	@Test
-	public void testGenerateRobotiumTest() {
-		//fail("Not yet implemented");		
+	public void testGenerateRobotiumTest() {			
 		RobotiumTestClassGenerator generator = new RobotiumTestClassGenerator();
 		generator.generateRobotiumTest("activityApp", Arrays.asList("clickOnButton(\"OK\")"), outputFilePath.toString());
 		
