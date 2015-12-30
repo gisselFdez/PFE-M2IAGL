@@ -17,7 +17,7 @@ public class RobotiumMethodFactory {
 	public String clickOnButton(HashMap<String, String> methodParametersMap){
 		//generate: clickOnButton("Text");
 		String text = methodParametersMap.get("mText");
-		return "clickOnButton("+text+")";
+		return "clickOnButton(\""+text+"\")";
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class RobotiumMethodFactory {
 	public String clickOnText(HashMap<String, String> methodParametersMap){
 		//generate: clickOnText(string);
 		String text =  methodParametersMap.get("mTitle");
-		return "clickOnText("+text+")";
+		return "clickOnText(\""+text+"\")";
 	}
 	
 	/**
