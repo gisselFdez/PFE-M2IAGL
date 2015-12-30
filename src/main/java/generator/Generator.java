@@ -1,11 +1,14 @@
 package generator;
 
+import java.util.List;
+
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
-import engine.TestGenerator;
+import engine.EventTransformer;
+import engine.RobotiumTestClassGenerator;
 import entities.Trace;
 import factories.TraceFactory;
 
@@ -46,9 +49,13 @@ public class Generator {
 			TraceFactory traceFactory = new TraceFactory();
 			Trace trace = traceFactory.getTrace(result.columnAs("paths"));
 			
+			//Transform the android events
+			EventTransformer generator = new EventTransformer();		
+			List<String> robotiumMethods = generator.getRobotiumMethods(trace.getEvents());		
+			
 			//Generate the robotium test
-			TestGenerator generator = new TestGenerator(fileOutput);		
-			generator.GenerateRobotiumTest(trace);									
+			RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
+			clsGen.generateRobotiumTest(trace.getAppActivity(),robotiumMethods,fileOutput);
 		}									
 	}
 }
