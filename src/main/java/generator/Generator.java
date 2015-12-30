@@ -5,9 +5,9 @@ import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
+import engine.TestGenerator;
 import entities.Trace;
 import factories.TraceFactory;
-import generators.TestGenerator;
 
 /**
  * Generator 
