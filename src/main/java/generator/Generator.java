@@ -56,6 +56,7 @@ public class Generator {
 			//Generate the robotium test
 			RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
 			clsGen.generateRobotiumTest(trace.getAppActivity(),robotiumMethods,fileOutput);
+			db.shutdown();
 		}									
 	}
 }

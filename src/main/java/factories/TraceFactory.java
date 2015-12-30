@@ -53,7 +53,7 @@ public class TraceFactory {
 	 * @param events
 	 * @return 
 	 */
-	public List<HashMap<String,String>> generateEvents(List<String> events){		
+	private List<HashMap<String,String>> generateEvents(List<String> events){		
 		List<HashMap<String,String>> androidEvents = new ArrayList<HashMap<String,String>>();
 		
 		for(String event : events){
