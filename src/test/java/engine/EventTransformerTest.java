@@ -16,7 +16,7 @@ public class EventTransformerTest {
 		//Test data
 		List<HashMap<String,String>> androidEvents = new ArrayList<HashMap<String,String>>();
 		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("mText", "OK");
+		map.put("mText", "\"OK\"");
 		map.put("action", "onClick");
 		map.put("instanceOf", "Button");
 		androidEvents.add(map);

@@ -15,7 +15,6 @@ import util.RobotiumMethodFactory;
 /**
  * Transform the Android events into Robotuim events 
  * @author Ana Gissel
- *
  */
 public class EventTransformer {
 
@@ -34,7 +33,7 @@ public class EventTransformer {
 	}
 	
 	/**
-	 * get the corresponding Robotium method code for the Android event.
+	 * Returns the corresponding Robotium method code for the Android event. 
 	 * @param androidAction
 	 * @return
 	 */
@@ -60,16 +59,11 @@ public class EventTransformer {
 					System.out.println("return: "+act);
 				}
 			}
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {			
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException |
+				SecurityException | NoSuchMethodException e) {			
 			e.printStackTrace();
 			return action;
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		} 
 		return action;
 	}
 	
