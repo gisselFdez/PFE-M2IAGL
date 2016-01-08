@@ -3,6 +3,8 @@ package util;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import factories.RobotiumMethodFactory;
+
 /**
  * this class contains all the mappings between Robotium and Android methods
  * @author Ana Gissel

@@ -9,8 +9,8 @@ import java.util.List;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 import entities.Trace;
+import factories.RobotiumMethodFactory;
 import util.MethodsMap;
-import util.RobotiumMethodFactory;
 
 /**
  * Transform the Android events into Robotuim events 
