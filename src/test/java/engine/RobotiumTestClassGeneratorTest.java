@@ -3,6 +3,8 @@ package engine;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.junit.AfterClass;
@@ -10,6 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+
+import util.RobotiumMethodFactory;
 
 public class RobotiumTestClassGeneratorTest {
 
@@ -37,6 +41,6 @@ public class RobotiumTestClassGeneratorTest {
 		
 		File file = new File(outputFilePath.toString(),"TestRobotium.java" );
 		assertTrue(file.exists());		
-	}
-
+	}	
+	
 }
