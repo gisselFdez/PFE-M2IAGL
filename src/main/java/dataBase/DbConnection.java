@@ -1,9 +1,12 @@
 package dataBase;
 
+import java.io.File;
+
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 
 import entities.Trace;
 import factories.TraceFactory;
@@ -33,8 +36,10 @@ public class DbConnection {
 	public static Trace getTraceFromDB(String path){
 		DB_PATH = path;
 				
-		db = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );	
-		System.out.println("before conexion");
+		db = new GraphDatabaseFactory()
+				.newEmbeddedDatabaseBuilder(new File(DB_PATH) )
+				.setConfig( GraphDatabaseSettings.allow_store_upgrade, "true" )
+				.newGraphDatabase();
 		try ( Transaction ignored = db.beginTx();
 			      Result result = db.execute(query) )
 		{
