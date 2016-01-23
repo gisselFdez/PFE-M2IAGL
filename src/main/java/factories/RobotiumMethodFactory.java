@@ -12,7 +12,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a clickOnButton method
 	 * @param methodParametersMap
-	 * @return 
+	 * @return Robotium method code
 	 */
 	public String clickOnButton(HashMap<String, String> methodParametersMap){
 		//generate: clickOnButton("Text");
@@ -23,7 +23,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a clickOnView method
 	 * @param methodParametersMap
-	 * @return
+	 * @return Robotium method code
 	 */
 	public String clickOnView(HashMap<String, String> methodParametersMap){
 		//generate: clickOnView(solo.getView(view))
@@ -34,7 +34,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a clickInList method
 	 * @param methodParametersMap
-	 * @return
+	 * @return Robotium method code
 	 */
 	public String clickInList(HashMap<String, String> methodParametersMap){
 		//generate: pressMenuItem(index);
@@ -45,7 +45,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a clickOnText method
 	 * @param methodParametersMap
-	 * @return
+	 * @return Robotium method code
 	 */
 	public String clickOnText(HashMap<String, String> methodParametersMap){
 		//generate: clickOnText(string);
@@ -56,7 +56,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a clickLongOnView method
 	 * @param methodParametersMap
-	 * @return
+	 * @return Robotium method code
 	 */
 	public String clickLongOnView(HashMap<String, String> methodParametersMap){
 		//generate: clickLongOnView(solo.getView(view));
@@ -67,7 +67,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a sendKey method
 	 * @param methodParametersMap
-	 * @return
+	 * @return Robotium method code
 	 */
 	public String sendKey(HashMap<String, String> methodParametersMap){
 		//generate: sendKey();
@@ -78,7 +78,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a clickLongInList method
 	 * @param methodParametersMap
-	 * @return
+	 * @return Robotium method code
 	 */
 	public String clickLongInList(HashMap<String, String> methodParametersMap){
 		//generate: clickLongInList(line)
@@ -89,7 +89,7 @@ public class RobotiumMethodFactory {
 	/**
 	 * Returns the corresponding Robotium code for a setActivityOrientation method
 	 * @param methodParametersMap
-	 * @return
+	 * @return Robotium method code
 	 */
 	public String setActivityOrientation(HashMap<String, String> methodParametersMap){
 		//generate: setActivityOrientation(1)		
