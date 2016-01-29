@@ -10,7 +10,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 import entities.Trace;
 import factories.RobotiumMethodFactory;
-import util.MethodsMap;
+import util.RobotiumMethodsMap;
 
 /**
  * Transform the Android events into Robotuim events 
@@ -44,7 +44,7 @@ public class EventTransformer {
 		try {
 			Object factory = RobotiumMethodFactory.class.newInstance();		
 			String instance = verifyInstance(methodParametersMap.get("instanceOf"), methodParametersMap);
-			Method methodFactory = MethodsMap.getMethod(methodParametersMap.get("action"),instance);
+			Method methodFactory = RobotiumMethodsMap.getMethod(methodParametersMap.get("action"),instance);
 			if(methodFactory!=null){
 				Object act = methodFactory.invoke(factory,methodParametersMap);
 				action = act.toString();
