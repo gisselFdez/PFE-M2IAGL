@@ -10,7 +10,7 @@ import factories.TextualMethodFactory;
 import util.TextualMethodsMap;
 
 /**
- * Generates a natural language specification for the given Android methods
+ * Translates Android methods in natural language specification
  * @author Ana Gissel
  *
  */
