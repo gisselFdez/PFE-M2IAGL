@@ -11,6 +11,7 @@ import dataBase.DbConnection;
 import engine.EventSpecification;
 import engine.EventTransformer;
 import engine.RobotiumTestClassGenerator;
+import engine.TextualFileGenerator;
 import entities.Trace;
 import factories.TraceFactory;
 
@@ -28,12 +29,19 @@ public class Generator {
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash2-CrowdCrashGraph";
 	private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/opensudoku-CrowdCrashGraph";	
 	private static String fileOutput="C:/Users/AnaGissel/Documents/MASTER/PFE/Workspace/TestAndroidCalculatorBlackBox2/src/com/testcalculator";
+	private static String textualOutput="C:/Users/AnaGissel/Desktop";
 		
 	public static void main(String[] args) {		
 		if (args.length == 2) {
 			DB_PATH = args[0].toString();
 			fileOutput = args[1].toString();
+			textualOutput = args[1].toString();
 		}			
+		if (args.length == 3) {
+			DB_PATH = args[0].toString();
+			fileOutput = args[1].toString();
+			textualOutput = args[2].toString();
+		}
 		    Trace trace  = DbConnection.getTraceFromDB(DB_PATH);
 			DbConnection.closeDb();
 			
@@ -67,13 +75,11 @@ public class Generator {
 	 */
 	private void generateSpecification(Trace trace){
 		EventSpecification specification = new EventSpecification();
+		TextualFileGenerator fileGenerator = new TextualFileGenerator();
 		
 		//Transform the android events				
 		List<String> textualSpecification = specification.getTextualSpecification(trace.getEvents());
-		System.out.println("-------Textual");
-		for(String s: textualSpecification){
-			System.out.println(s);
-		}
+		fileGenerator.generateFile(textualSpecification, textualOutput);
 	}
 }
 
