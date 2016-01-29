@@ -9,15 +9,15 @@ import factories.RobotiumMethodFactory;
  * this class contains all the mappings between Robotium and Android methods
  * @author Ana Gissel
  */
-public class MethodsMap {
+public class RobotiumMethodsMap {
 
-	private static MethodsMap myMap = new MethodsMap();	
+	private static RobotiumMethodsMap myMap = new RobotiumMethodsMap();	
 	private static HashMap<String, HashMap<String, Method>> methodMap;
 
 	/**
 	 * Initialize the mappings with the equivalences between Android and Robotium methods  
 	 */
-	private MethodsMap (){		
+	private RobotiumMethodsMap (){		
 		try {
 			//Initialize all the values for the MAP
 			methodMap = new HashMap<String, HashMap<String, Method>>();			
@@ -68,7 +68,7 @@ public class MethodsMap {
 	 * Returns the actual instance of MethodsMap
 	 * @return
 	 */
-	public MethodsMap getInstance(){
+	public RobotiumMethodsMap getInstance(){
 		return myMap;
 	}
 	
