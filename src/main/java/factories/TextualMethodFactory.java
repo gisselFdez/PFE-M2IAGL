@@ -18,7 +18,7 @@ public class TextualMethodFactory {
 	 */
 	public String clickOnButton(HashMap<String, String> methodParametersMap){
 		String text = methodParametersMap.get("mText");
-		return "Click on button \""+text+"\".";
+		return "Click on button "+text+".";
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public class TextualMethodFactory {
 	public String clickOnView(HashMap<String, String> methodParametersMap){
 		//generate: clickOnView(solo.getView(view))
 		String view = methodParametersMap.get("mID");
-		return "Click on view id: \""+view+"\".";
+		return "Click on view id: "+view+".";
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class TextualMethodFactory {
 	public String clickInList(HashMap<String, String> methodParametersMap){
 		//generate: pressMenuItem(index);
 		String valueId =  methodParametersMap.get("id");
-		return "Click on item #\""+valueId+"\" from list.";
+		return "Click on item #"+valueId+" from list.";
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class TextualMethodFactory {
 	public String clickOnText(HashMap<String, String> methodParametersMap){
 		//generate: clickOnText(string);
 		String text =  methodParametersMap.get("mTitle");
-		return "Click on text \""+text+"\".";
+		return "Click on text "+text+".";
 	}
 	
 	/**

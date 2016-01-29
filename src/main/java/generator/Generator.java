@@ -8,6 +8,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
 import dataBase.DbConnection;
+import engine.EventSpecification;
 import engine.EventTransformer;
 import engine.RobotiumTestClassGenerator;
 import entities.Trace;
@@ -23,9 +24,9 @@ public class Generator {
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/pockettool-CrowdCrashGraph";
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/wikipedia-CrowdCrashGraph";	
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/bites-CrowdCrashGraph";
-	private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash1-CrowdCrashGraph";
+	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash1-CrowdCrashGraph";
 	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/google-crash2-CrowdCrashGraph";
-	//private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/opensudoku-CrowdCrashGraph";	
+	private static String DB_PATH = "C:/Users/AnaGissel/Documents/Neo4j/opensudoku-CrowdCrashGraph";	
 	private static String fileOutput="C:/Users/AnaGissel/Documents/MASTER/PFE/Workspace/TestAndroidCalculatorBlackBox2/src/com/testcalculator";
 		
 	public static void main(String[] args) {		
@@ -65,7 +66,14 @@ public class Generator {
 	 * @param trace
 	 */
 	private void generateSpecification(Trace trace){
+		EventSpecification specification = new EventSpecification();
 		
+		//Transform the android events				
+		List<String> textualSpecification = specification.getTextualSpecification(trace.getEvents());
+		System.out.println("-------Textual");
+		for(String s: textualSpecification){
+			System.out.println(s);
+		}
 	}
 }
 
