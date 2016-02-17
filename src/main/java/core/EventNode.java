@@ -17,6 +17,5 @@ public class EventNode {
 	
 	public EventNode(HashMap<String, String> parameters){
 		this.eventParameters = parameters;
-	}
-	
+	}	
 }

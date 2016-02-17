@@ -4,22 +4,30 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Path;
 
 import core.EventNode;
 import core.Graph;
+import core.Visitor;
 import factories.RobotiumMethodFactory;
+import generator.Generator;
 import util.RobotiumMethodsMap;
 
 /**
  * Transform the Android events into Robotuim events 
  * @author Ana Gissel
  */
-public class EventTransformer {
+public class EventTransformer implements Visitor{
 
+	@Override
+	public void visit(Graph graph) {
+		RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
+		//Transform the android events
+		List<String> robotiumMethods = getRobotiumMethods(graph.getEvents());
+		//Generate the robotium test		
+		clsGen.generateRobotiumTest(graph.getAppActivity().getActivity(),robotiumMethods,Generator.fileOutput);
+	}
+	
 	/**
 	 * Returns the list of equivalent Robotium methods for the given android events list
 	 * @param androidEvents
@@ -79,5 +87,7 @@ public class EventTransformer {
 		if(instanceOf.contains("Layout"))
 			instanceOf = methodParametersMap.get("parenAction");
 		return instanceOf;
-	}	
+	}
+
+		
 }

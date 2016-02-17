@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import core.EventNode;
+import core.Graph;
+import core.Visitor;
 import factories.TextualMethodFactory;
+import generator.Generator;
 import util.TextualMethodsMap;
 
 /**
@@ -15,8 +18,17 @@ import util.TextualMethodsMap;
  * @author Ana Gissel
  *
  */
-public class EventSpecification {
+public class EventSpecification implements Visitor{
 
+	@Override
+	public void visit(Graph graph) {
+		TextualFileGenerator fileGenerator = new TextualFileGenerator();
+		
+		//Transform the android events				
+		List<String> textualSpecification = getTextualSpecification(graph.getEvents());
+		fileGenerator.generateFile(textualSpecification, Generator.textualOutput);
+	}
+	
 	/**
 	 * Returns the list of equivalent Robotium methods for the given android events list
 	 * @param androidEvents
@@ -76,5 +88,5 @@ public class EventSpecification {
 		if(instanceOf.contains("Layout"))
 			instanceOf = methodParametersMap.get("parenAction");
 		return instanceOf;
-	}	
+	}		
 }

@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * The Graph class describes the application crash scenario
+ * The Graph class that describes the application crash scenario
  * @author Ana Gissel
  *
  */
-public class Graph {
+public class Graph implements Visitable{
 
 	/**
 	 * The node with the name of the application activity
@@ -21,7 +21,7 @@ public class Graph {
 	private List<EventNode> events;
 	
 	/**
-	 * The node with the exception produced in the crash escenario
+	 * The node with the exception produced in the crash scenario
 	 */
 	private ExceptionNode exception;	
 	
@@ -48,5 +48,10 @@ public class Graph {
 	
 	public void setException(ExceptionNode exception) {
 		this.exception = exception;
+	}
+
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}	
 }
