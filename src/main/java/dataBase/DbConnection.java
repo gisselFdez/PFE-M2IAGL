@@ -8,7 +8,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 
-import entities.Trace;
+import core.Graph;
 import factories.TraceFactory;
 
 /**
@@ -33,7 +33,7 @@ public class DbConnection {
 	 * @param path - Neo4j database location
 	 * @return The trace object.
 	 */
-	public static Trace getTraceFromDB(String path){
+	public static Graph getTraceFromDB(String path){
 		DB_PATH = path;
 				
 		db = new GraphDatabaseFactory()
@@ -45,7 +45,7 @@ public class DbConnection {
 		{
 			TraceFactory traceFactory = new TraceFactory();
 			//get the trace for the database		
-			Trace trace = traceFactory.getTrace(result.columnAs("paths"));
+			Graph trace = traceFactory.getTrace(result.columnAs("paths"));
 			return trace;
 		}
 		catch(Exception e){

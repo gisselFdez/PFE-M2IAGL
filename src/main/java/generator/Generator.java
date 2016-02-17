@@ -7,12 +7,12 @@ import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
+import core.Graph;
 import dataBase.DbConnection;
 import engine.EventSpecification;
 import engine.EventTransformer;
 import engine.RobotiumTestClassGenerator;
 import engine.TextualFileGenerator;
-import entities.Trace;
 import factories.TraceFactory;
 
 /**
@@ -42,7 +42,7 @@ public class Generator {
 			fileOutput = args[1].toString();
 			textualOutput = args[2].toString();
 		}
-		    Trace trace  = DbConnection.getTraceFromDB(DB_PATH);
+		    Graph trace  = DbConnection.getTraceFromDB(DB_PATH);
 			DbConnection.closeDb();
 			
 		    Generator generator = new Generator();
@@ -58,7 +58,7 @@ public class Generator {
 	 * Call all the corresponding methods to generate a Robotium blackbox test from the given trace
 	 * @param trace
 	 */
-	private void generateTest(Trace trace){		
+	private void generateTest(Graph trace){		
 		EventTransformer generator = new EventTransformer();
 		RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
 		
@@ -66,14 +66,14 @@ public class Generator {
 		List<String> robotiumMethods = generator.getRobotiumMethods(trace.getEvents());		
 		
 		//Generate the robotium test		
-		clsGen.generateRobotiumTest(trace.getAppActivity(),robotiumMethods,fileOutput);
+		clsGen.generateRobotiumTest(trace.getAppActivity().getActivity(),robotiumMethods,fileOutput);
 	}
 	
 	/**
 	 * Call all the corresponding methods to generate the test specification in natural language from the given trace
 	 * @param trace
 	 */
-	private void generateSpecification(Trace trace){
+	private void generateSpecification(Graph trace){
 		EventSpecification specification = new EventSpecification();
 		TextualFileGenerator fileGenerator = new TextualFileGenerator();
 		

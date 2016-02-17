@@ -8,7 +8,10 @@ import java.util.List;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 
-import entities.Trace;
+import core.ActivityNode;
+import core.EventNode;
+import core.ExceptionNode;
+import core.Graph;
 
 /**
  * Contains all the methods that treat the DB information to transform it into a Trace object
@@ -22,8 +25,8 @@ public class TraceFactory {
 	 * @param n_column
 	 * @return the Trace
 	 */
-	public Trace getTrace(Iterator<Path> n_column){
-		Trace trace = new Trace();
+	public Graph getTrace(Iterator<Path> n_column){
+		Graph trace = new Graph();
 		List<String> events = new ArrayList<String>();
 		
 		//Generate code for every node
@@ -36,11 +39,11 @@ public class TraceFactory {
     		{
 				for (String key : node.getPropertyKeys()) {
 					if(key.equals("app"))
-						trace.setAppActivity(node.getProperty(key).toString());					
+						trace.setAppActivity(new ActivityNode(node.getProperty(key).toString()));					
 					if(!key.equals("app") && !key.equals("exception") && !key.equals("counter"))
 						events.add(node.getProperty(key).toString());					
 					if(key.equals("exception"))
-						trace.setException(node.getProperty(key).toString());
+						trace.setException(new ExceptionNode(node.getProperty(key).toString()));
             	}
     		}					
         }
@@ -53,12 +56,12 @@ public class TraceFactory {
 	 * @param events
 	 * @return 
 	 */
-	private List<HashMap<String,String>> generateEvents(List<String> events){		
-		List<HashMap<String,String>> androidEvents = new ArrayList<HashMap<String,String>>();
+	private List<EventNode> generateEvents(List<String> events){		
+		List<EventNode> androidEvents = new ArrayList<EventNode>();
 		
 		for(String event : events){
 			HashMap<String, String> methodParametersMap = generateParametersMap(event);
-			androidEvents.add(methodParametersMap);
+			androidEvents.add(new EventNode(methodParametersMap));
 		}
 		return androidEvents;
 	}

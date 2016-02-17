@@ -8,7 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
-import entities.Trace;
+
+import core.EventNode;
+import core.Graph;
 import factories.RobotiumMethodFactory;
 import util.RobotiumMethodsMap;
 
@@ -23,11 +25,11 @@ public class EventTransformer {
 	 * @param androidEvents
 	 * @return
 	 */
-	public List<String> getRobotiumMethods(List<HashMap<String,String>> androidEvents){
+	public List<String> getRobotiumMethods(List<EventNode> androidEvents){
 		List<String> robotiumActions = new ArrayList<String>();
 		
-		for(HashMap<String,String> parametersMap : androidEvents){
-			robotiumActions.add(getActionCode(parametersMap));
+		for(EventNode event : androidEvents){
+			robotiumActions.add(getActionCode(event.getEventParameters()));
 		}
 		return robotiumActions;
 	}

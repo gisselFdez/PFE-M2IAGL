@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import core.EventNode;
 import factories.TextualMethodFactory;
 import util.TextualMethodsMap;
 
@@ -21,11 +22,11 @@ public class EventSpecification {
 	 * @param androidEvents
 	 * @return
 	 */
-	public List<String> getTextualSpecification(List<HashMap<String,String>> androidEvents){
+	public List<String> getTextualSpecification(List<EventNode> androidEvents){
 		List<String> textualActions = new ArrayList<String>();
 		
-		for(HashMap<String,String> parametersMap : androidEvents){
-			textualActions.add(getActionCode(parametersMap));
+		for(EventNode event : androidEvents){
+			textualActions.add(getActionCode(event.getEventParameters()));
 		}
 		return textualActions;
 	}

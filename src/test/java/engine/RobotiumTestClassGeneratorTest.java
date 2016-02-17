@@ -3,24 +3,20 @@ package engine;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-
-import factories.RobotiumMethodFactory;
 
 public class RobotiumTestClassGeneratorTest {
 
 	private static File outputFilePath;
+	private static RobotiumTestClassGenerator generator;
 	
 	@BeforeClass 
 	public static void setup() {
+		generator = new RobotiumTestClassGenerator();
 		outputFilePath = new File("/tmp");
 	      if(!outputFilePath.exists()){
 	    	  outputFilePath.mkdir();
@@ -35,8 +31,7 @@ public class RobotiumTestClassGeneratorTest {
 	}
 	
 	@Test
-	public void testGenerateRobotiumTest() {			
-		RobotiumTestClassGenerator generator = new RobotiumTestClassGenerator();
+	public void testGenerateRobotiumTest() {		
 		generator.generateRobotiumTest("activityApp", Arrays.asList("clickOnButton(\"OK\")"), outputFilePath.toString());
 		
 		File file = new File(outputFilePath.toString(),"TestRobotium.java" );

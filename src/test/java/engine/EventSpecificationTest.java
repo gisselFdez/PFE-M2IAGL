@@ -11,10 +11,10 @@ import org.junit.Test;
 
 import core.EventNode;
 
-public class EventTransformerTest {
+public class EventSpecificationTest {
 
 	@Test
-	public void testGetRobotiumMethods() {		
+	public void test() {
 		//Test data
 		List<EventNode> androidEvents = new ArrayList<EventNode>();
 		HashMap<String,String> map = new HashMap<String,String>();
@@ -24,15 +24,16 @@ public class EventTransformerTest {
 		androidEvents.add(new EventNode(map));
 		
 		//expected result
-		List<String> expected = Arrays.asList("clickOnButton(\"OK\")");
+		List<String> expected = Arrays.asList("Click on button \"OK\".");
 		
 		//Tested class
-		EventTransformer event = new EventTransformer();
-		List<String> robotiumEvents = event.getRobotiumMethods(androidEvents);
+		EventSpecification event = new EventSpecification();
+		List<String> specifications = event.getTextualSpecification(androidEvents);
 		
 		assertTrue("Expected 'robotiumEvents' and 'expected' to be equal."+
-	            "\n  'robotiumEvents' = "+robotiumEvents+
+	            "\n  'robotiumEvents' = "+specifications+
 	            "\n  'expected' = "+expected, 
-	            expected.equals(robotiumEvents));
+	            expected.equals(specifications));
 	}
+
 }
