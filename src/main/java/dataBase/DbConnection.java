@@ -21,11 +21,21 @@ public class DbConnection {
 	private static String DB_PATH = "";
 	private static GraphDatabaseService db;
 	//Neo4j Dijkstra query to obtain the crash scenario
-	private static String query = "MATCH (from: APP), (to:CRASH_EVENT), "+
+	private static String query = "MATCH (from: APP), (to:CRASH_EVENT), paths = allShortestPaths( (from)-[:NEXT*]->(to) ) "+
+		   "WITH REDUCE(dist = 0, rel in rels(paths) | dist + rel.pN) AS distance, paths "+
+		   "RETURN paths, distance ORDER BY distance "+
+		   "LIMIT 1 "+
+		   "UNION ALL "+
+		   "MATCH (from: CRASH_EVENT), (to:STATIC_CONTEXT), paths = (from)-[:WITH_STATIC_CONTEXT*]->(to) "+
+		   "WITH REDUCE(dist = 0, rel in rels(paths) | dist + rel.pN) AS distance, paths "+
+		   "RETURN paths, distance ORDER BY distance ";
+	/*
+	 * "MATCH (from: APP), (to:CRASH_EVENT), "+
 				      "paths = allShortestPaths( (from)-[:NEXT*]->(to) ) " +
 				      "WITH REDUCE(dist = 0, rel in rels(paths) | dist + rel.pN) AS distance, paths "+
 				      "RETURN paths, distance ORDER BY distance "+
 				      "LIMIT 1";
+	 */
 
 	/**
 	 * Make a connection with the database located at "path", executes the disjtra query and

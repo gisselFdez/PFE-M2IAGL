@@ -59,7 +59,7 @@ public class EventSpecification implements Visitor{
 			if(methodFactory!=null){
 				Object act = methodFactory.invoke(factory,methodParametersMap);
 				action = act.toString();
-				System.out.println("return: "+act);
+				//System.out.println("return: "+act);
 			}
 			else{
 				if(methodParametersMap.get("action").equals("onClick") && methodParametersMap.get("mID")!=null){
@@ -67,7 +67,7 @@ public class EventSpecification implements Visitor{
 					methodFactory = TextualMethodFactory.class.getDeclaredMethod("clickOnView",paramTypes);
 					Object act = methodFactory.invoke(factory,methodParametersMap);
 					action = act.toString();
-					System.out.println("return: "+act);
+					//System.out.println("return: "+act);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException |

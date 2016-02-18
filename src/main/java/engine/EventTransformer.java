@@ -4,9 +4,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import core.ContextNode;
 import core.EventNode;
+import core.ExceptionNode;
 import core.Graph;
 import core.Visitor;
 import factories.RobotiumMethodFactory;
@@ -24,8 +28,11 @@ public class EventTransformer implements Visitor{
 		RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
 		//Transform the android events
 		List<String> robotiumMethods = getRobotiumMethods(graph.getEvents());
-		//Generate the robotium test		
-		clsGen.generateRobotiumTest(graph.getAppActivity().getActivity(),robotiumMethods,Generator.fileOutput);
+		//Generate the robotium test	
+		String sdk = getSdkContext(graph.getException());
+		String manufacturer = getManufactuerContext(graph.getException());
+		clsGen.generateRobotiumTest(graph.getAppActivity().getActivity(),robotiumMethods,Generator.fileOutput,
+				sdk,manufacturer);
 	}
 	
 	/**
@@ -58,7 +65,7 @@ public class EventTransformer implements Visitor{
 			if(methodFactory!=null){
 				Object act = methodFactory.invoke(factory,methodParametersMap);
 				action = act.toString();
-				System.out.println("return: "+act);
+				//System.out.println("return: "+act);
 			}
 			else{
 				if(methodParametersMap.get("action").equals("onClick") && methodParametersMap.get("mID")!=null){
@@ -66,7 +73,7 @@ public class EventTransformer implements Visitor{
 					methodFactory = RobotiumMethodFactory.class.getDeclaredMethod("clickOnView",paramTypes);
 					Object act = methodFactory.invoke(factory,methodParametersMap);
 					action = act.toString();
-					System.out.println("return: "+act);
+					//System.out.println("return: "+act);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException |
@@ -87,7 +94,45 @@ public class EventTransformer implements Visitor{
 		if(instanceOf.contains("Layout"))
 			instanceOf = methodParametersMap.get("parenAction");
 		return instanceOf;
-	}
-
+	}		
+	
+	/**
+	 * Get the sdk context from the ExceptionNode and eliminate duplicated contextss
+	 * @param node
+	 * @return a String with the Sdk contexts
+	 */
+	private String getSdkContext(ExceptionNode node){
+		String sdk="";
+		//eliminate duplicates
+		Set<String> set= new HashSet<String>();
+		for(ContextNode cntx : node.getContexts()){
+			set.add(cntx.getAndroidSDK());
+		}
+		//convert to string
+		for(String s:set){
+			if(sdk.equals(""))
+				sdk=s;
+			else
+				sdk= sdk+", "+s;
+		}
 		
+		return sdk;
+	}
+	
+	/**
+	 * Get the manufacturer context from the ExceptionNode
+	 * @param node
+	 * @return a String with the manufacturer contexts
+	 */
+	private String getManufactuerContext(ExceptionNode node){
+		String manufacturer="";
+		
+		for(ContextNode cntx: node.getContexts()){
+			if(manufacturer.equals(""))
+				manufacturer = cntx.getManufacturer();
+			else
+				manufacturer = manufacturer+", "+cntx.getManufacturer();
+		}
+		return manufacturer;
+	}
 }

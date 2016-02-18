@@ -7,12 +7,16 @@ import java.util.List;
 import javax.lang.model.element.Modifier;
 
 import com.robotium.solo.Solo;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.MethodSpec.Builder;
 import android.test.ActivityInstrumentationTestCase2;
+import annotations.AndroidSDK;
+import annotations.Manufacturer;
+
 import com.squareup.javapoet.TypeSpec;
 
 /**
@@ -27,7 +31,7 @@ public class RobotiumTestClassGenerator {
 	 * @param userActions
 	 * @param output
 	 */
-	public void generateRobotiumTest(String packageApp, List<String> userActions,String output){
+	public void generateRobotiumTest(String packageApp, List<String> userActions,String output,String sdk,String manufacturer){
 				
 		//Generate the class
 		TypeSpec testRobotium = TypeSpec.classBuilder("TestRobotium")
@@ -49,7 +53,7 @@ public class RobotiumTestClassGenerator {
 		    .addMethod(generateConstructor())
 		    .addField(Solo.class,"solo",Modifier.PRIVATE)
 		    .addMethod(generateSetUpMethod())
-		    .addMethod(generateTestMethod(userActions))
+		    .addMethod(generateTestMethod(userActions,sdk,manufacturer))
 		    .addMethod(generateTearDownMethod())
 		    .build();
 
@@ -83,8 +87,14 @@ public class RobotiumTestClassGenerator {
 	 * @param userActions
 	 * @return
 	 */
-	private MethodSpec generateTestMethod(List<String> userActions){
-		Builder builder = MethodSpec.methodBuilder("testDisplayBlackBox");
+	private MethodSpec generateTestMethod(List<String> userActions,String sdk, String manufacturer){
+		Builder builder = MethodSpec.methodBuilder("testDisplayBlackBox")
+				.addAnnotation(AnnotationSpec.builder(AndroidSDK.class)
+				        .addMember("sdk", "$S", sdk)
+				        .build())
+				.addAnnotation(AnnotationSpec.builder(Manufacturer.class)
+				        .addMember("manufacturer", "$S", manufacturer)
+				        .build());
 		builder.addModifiers(Modifier.PUBLIC);
 		builder.addStatement("solo.waitForActivity($N)", "LAUNCHER_ACTIVITY_FULL_CLASSNAME");
 		
