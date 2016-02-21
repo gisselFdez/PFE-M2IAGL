@@ -1,11 +1,11 @@
 package core;
 
-public class ContextNode {
+public class StaticContextNode {
 
 	private String androidSDK;
 	private String manufacturer;
 	
-	public ContextNode(String sdk, String manufacturer){
+	public StaticContextNode(String sdk, String manufacturer){
 		this.androidSDK = sdk;
 		this.manufacturer = manufacturer;
 	}

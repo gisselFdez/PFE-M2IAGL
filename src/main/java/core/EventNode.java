@@ -6,6 +6,15 @@ import java.util.List;
 public class EventNode {
 
 	private HashMap<String,String> eventParameters;
+	private List<DynamicContextNode> dynamicContext;
+	
+	public List<DynamicContextNode> getDynamicContext() {
+		return dynamicContext;
+	}
+
+	public void setDynamicContext(List<DynamicContextNode> dynamicContext) {
+		this.dynamicContext = dynamicContext;
+	}
 
 	public HashMap<String, String> getEventParameters() {
 		return eventParameters;

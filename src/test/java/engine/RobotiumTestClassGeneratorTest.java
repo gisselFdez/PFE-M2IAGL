@@ -33,7 +33,7 @@ public class RobotiumTestClassGeneratorTest {
 	@Test
 	public void testGenerateRobotiumTest() {		
 		generator.generateRobotiumTest("activityApp", Arrays.asList("clickOnButton(\"OK\")"), outputFilePath.toString(),
-				"4.0.1","Samsung");
+				"4.0.1","Samsung","WIFI=ON,WIFI=OFF");
 		
 		File file = new File(outputFilePath.toString(),"TestRobotium.java" );
 		assertTrue(file.exists());		

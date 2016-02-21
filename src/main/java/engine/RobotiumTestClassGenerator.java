@@ -15,6 +15,7 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.MethodSpec.Builder;
 import android.test.ActivityInstrumentationTestCase2;
 import annotations.AndroidSDK;
+import annotations.DynamicContext;
 import annotations.Manufacturer;
 
 import com.squareup.javapoet.TypeSpec;
@@ -31,7 +32,8 @@ public class RobotiumTestClassGenerator {
 	 * @param userActions
 	 * @param output
 	 */
-	public void generateRobotiumTest(String packageApp, List<String> userActions,String output,String sdk,String manufacturer){
+	public void generateRobotiumTest(String packageApp, List<String> userActions,
+			String output,String sdk,String manufacturer, String dynamicContext){
 				
 		//Generate the class
 		TypeSpec testRobotium = TypeSpec.classBuilder("TestRobotium")
@@ -53,7 +55,7 @@ public class RobotiumTestClassGenerator {
 		    .addMethod(generateConstructor())
 		    .addField(Solo.class,"solo",Modifier.PRIVATE)
 		    .addMethod(generateSetUpMethod())
-		    .addMethod(generateTestMethod(userActions,sdk,manufacturer))
+		    .addMethod(generateTestMethod(userActions,sdk,manufacturer,dynamicContext))
 		    .addMethod(generateTearDownMethod())
 		    .build();
 
@@ -87,13 +89,16 @@ public class RobotiumTestClassGenerator {
 	 * @param userActions
 	 * @return
 	 */
-	private MethodSpec generateTestMethod(List<String> userActions,String sdk, String manufacturer){
+	private MethodSpec generateTestMethod(List<String> userActions,String sdk, String manufacturer,String dynamicContext){
 		Builder builder = MethodSpec.methodBuilder("testDisplayBlackBox")
 				.addAnnotation(AnnotationSpec.builder(AndroidSDK.class)
 				        .addMember("sdk", "$S", sdk)
 				        .build())
 				.addAnnotation(AnnotationSpec.builder(Manufacturer.class)
 				        .addMember("manufacturer", "$S", manufacturer)
+				        .build())
+				.addAnnotation(AnnotationSpec.builder(DynamicContext.class)
+				        .addMember("context", "$S", dynamicContext)
 				        .build());
 		builder.addModifiers(Modifier.PUBLIC);
 		builder.addStatement("solo.waitForActivity($N)", "LAUNCHER_ACTIVITY_FULL_CLASSNAME");

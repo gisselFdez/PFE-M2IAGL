@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import core.ContextNode;
+import core.StaticContextNode;
 import core.EventNode;
 import core.ExceptionNode;
 import core.Graph;
@@ -26,13 +26,17 @@ public class EventTransformer implements Visitor{
 	@Override
 	public void visit(Graph graph) {
 		RobotiumTestClassGenerator clsGen = new RobotiumTestClassGenerator();
+		
 		//Transform the android events
 		List<String> robotiumMethods = getRobotiumMethods(graph.getEvents());
-		//Generate the robotium test	
+		//Get the static context
 		String sdk = getSdkContext(graph.getException());
 		String manufacturer = getManufactuerContext(graph.getException());
+		//Get the dynamic context
+		String dynamicContext = getDynamicContext(graph.getEvents(),graph.getException());
+		//Generate the robotium test	
 		clsGen.generateRobotiumTest(graph.getAppActivity().getActivity(),robotiumMethods,Generator.fileOutput,
-				sdk,manufacturer);
+				sdk,manufacturer,dynamicContext);
 	}
 	
 	/**
@@ -105,7 +109,7 @@ public class EventTransformer implements Visitor{
 		String sdk="";
 		//eliminate duplicates
 		Set<String> set= new HashSet<String>();
-		for(ContextNode cntx : node.getContexts()){
+		for(StaticContextNode cntx : node.getContexts()){
 			set.add(cntx.getAndroidSDK());
 		}
 		//convert to string
@@ -114,8 +118,7 @@ public class EventTransformer implements Visitor{
 				sdk=s;
 			else
 				sdk= sdk+", "+s;
-		}
-		
+		}		
 		return sdk;
 	}
 	
@@ -127,12 +130,19 @@ public class EventTransformer implements Visitor{
 	private String getManufactuerContext(ExceptionNode node){
 		String manufacturer="";
 		
-		for(ContextNode cntx: node.getContexts()){
+		for(StaticContextNode cntx: node.getContexts()){
 			if(manufacturer.equals(""))
 				manufacturer = cntx.getManufacturer();
 			else
 				manufacturer = manufacturer+", "+cntx.getManufacturer();
 		}
 		return manufacturer;
+	}
+	
+	private String getDynamicContext(List<EventNode> events,ExceptionNode exception){
+		BideFileGenerator fileGenerator = new BideFileGenerator();
+		fileGenerator.generate(events, exception);
+		
+		return "";
 	}
 }
