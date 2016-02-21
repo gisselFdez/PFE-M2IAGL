@@ -141,8 +141,14 @@ public class EventTransformer implements Visitor{
 	
 	private String getDynamicContext(List<EventNode> events,ExceptionNode exception){
 		BideFileGenerator fileGenerator = new BideFileGenerator();
-		fileGenerator.generate(events, exception);
+		BideAlgorithmRunner bideRunner = new BideAlgorithmRunner();
+		BideFileReader bideReader = new BideFileReader();
 		
-		return "";
+		//generate the bideInput file
+		String bideInput = fileGenerator.generate(events, exception);
+		//Execute bide algorithm
+		String bideOutput = bideRunner.run(bideInput);
+		//Read bide output file		
+		return bideReader.read(bideOutput);
 	}
 }

@@ -26,7 +26,7 @@ public class BideFileGenerator {
 	 * of BIDE+ algorithm.
 	 * @param events
 	 */
-	public void generate(List<EventNode> events,ExceptionNode exception){		
+	public String generate(List<EventNode> events,ExceptionNode exception){		
 		List<List<String>> contextsList = generateContextsList(events,exception);
 		String matrix[][] = createContextMatrix(contextsList);	
 				
@@ -47,7 +47,8 @@ public class BideFileGenerator {
 				
 			//add line to file
 			writeToOutputFile(path,line);
-		}		
+		}	
+		return path;
 	}
 	
 	/**
