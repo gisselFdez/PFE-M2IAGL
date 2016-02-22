@@ -1,19 +1,9 @@
 package generator;
 
-import java.util.List;
-
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Result;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-
 import core.Graph;
 import dataBase.DbConnection;
 import engine.EventSpecification;
 import engine.EventTransformer;
-import engine.RobotiumTestClassGenerator;
-import engine.TextualFileGenerator;
-import factories.TraceFactory;
 
 /**
  * Generator 
