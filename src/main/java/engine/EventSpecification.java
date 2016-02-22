@@ -26,7 +26,7 @@ public class EventSpecification implements Visitor{
 		
 		//Transform the android events				
 		List<String> textualSpecification = getTextualSpecification(graph.getEvents());
-		fileGenerator.generateFile(textualSpecification, Generator.textualOutput);
+		fileGenerator.generateFile(textualSpecification, Generator.textualOutput,graph.getException());
 	}
 	
 	/**
