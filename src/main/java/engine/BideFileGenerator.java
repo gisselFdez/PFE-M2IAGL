@@ -52,7 +52,8 @@ public class BideFileGenerator {
 	}
 	
 	/**
-	 * Creates the bide file
+	 * Creates the bide file. 
+	 * This file will be used as an input file for the BIDE+ algorithm implemented by the spmf.jar
 	 * @return
 	 */
 	private static String createOutputFile(){
@@ -150,8 +151,7 @@ public class BideFileGenerator {
 		for(List<String> contexts : contextsList){
 			if(contexts.size()>max)
 				max = contexts.size();
-		}
-		
+		}		
 		return max;
 	}
 }

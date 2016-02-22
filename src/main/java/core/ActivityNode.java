@@ -1,5 +1,9 @@
 package core;
-
+/**
+ * Describes the node that contains the activity details
+ * @author Ana Gissel
+ *
+ */
 public class ActivityNode {
 	private String activity;
 

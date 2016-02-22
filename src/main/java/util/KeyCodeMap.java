@@ -1,6 +1,10 @@
 package util;
 import java.util.HashMap;
-
+/**
+ * Class containing the list of equivalences for every key pressed in an Android environement.
+ * @author Ana Gissel
+ *
+ */
 public class KeyCodeMap {
 
 	private static KeyCodeMap myMap = new KeyCodeMap();	

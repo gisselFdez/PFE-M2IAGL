@@ -139,6 +139,12 @@ public class EventTransformer implements Visitor{
 		return manufacturer;
 	}
 	
+	/**
+	 * Call the corresponding methods that obtain the dynamic context for the crash scenario
+	 * @param events
+	 * @param exception
+	 * @return
+	 */
 	private String getDynamicContext(List<EventNode> events,ExceptionNode exception){
 		BideFileGenerator fileGenerator = new BideFileGenerator();
 		BideAlgorithmRunner bideRunner = new BideAlgorithmRunner();

@@ -11,6 +11,11 @@ import java.util.Scanner;
  */
 public class BideFileReader {
 
+	/**
+	 * Read the result of the BIDE+ algorithm placed on the outputfile
+	 * @param file
+	 * @return
+	 */
 	public String read(String file){
 		String result="";
 		try {

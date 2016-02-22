@@ -1,5 +1,9 @@
 package core;
-
+/**
+ * Describes the node containing the Dynamic Context of the crash
+ * @author Ana Gissel
+ *
+ */
 public class DynamicContextNode {
 
 	private String network;

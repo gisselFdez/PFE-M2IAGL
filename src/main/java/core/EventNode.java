@@ -2,7 +2,11 @@ package core;
 
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * Describes the node containing an Android event for the crash scenario
+ * @author Ana Gissel
+ *
+ */
 public class EventNode {
 
 	private HashMap<String,String> eventParameters;

@@ -2,12 +2,6 @@ package engine;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * This class contains the methods that runs the bide+ algorithm using the SPMF.jar
@@ -29,16 +23,13 @@ public class BideAlgorithmRunner {
 			else{
 				bideOutput = bideOutput+"/output.txt";
 			}	
-		     
-
 		      Process proc= Runtime.getRuntime().exec("java -jar "+getBideJarPath()+" run BIDE+_with_strings "+
 						  			bideInput+" "+bideOutput+" 1");
 		      return bideOutput;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return "";
-			}  
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "";
+		}  
 	}
 	
 	/**

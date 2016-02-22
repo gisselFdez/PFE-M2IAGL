@@ -1,7 +1,11 @@
 package core;
 
 import java.util.List;
-
+/**
+ * Describes the node containing the details of the exception produced
+ * @author Ana Gissel
+ *
+ */
 public class ExceptionNode {
 
 	private String exception;

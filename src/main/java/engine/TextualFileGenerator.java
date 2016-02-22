@@ -16,6 +16,12 @@ import core.StaticContextNode;
  */
 public class TextualFileGenerator {
 
+	/**
+	 * Generates a file containing the textual specification of the crash scenario
+	 * @param actions
+	 * @param fileOutput
+	 * @param exception
+	 */
 	public void generateFile(List<String> actions, String fileOutput,ExceptionNode exception){
 				
 		File file = new File(fileOutput+"/TextualSpecification.txt");
@@ -23,7 +29,8 @@ public class TextualFileGenerator {
 		try {
 			fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
-			//describe context
+			
+			//describe static context
 			List<StaticContextNode> staticContexts = exception.getContexts();
 			String sdk="";
 			String manufacturer="";
@@ -56,7 +63,7 @@ public class TextualFileGenerator {
 				}
 			}
 			//add exception detail
-			bw.write("  - "+exception.getException());
+			bw.write("    "+exception.getException());
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
